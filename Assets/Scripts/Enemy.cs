@@ -11,12 +11,14 @@ public class Enemy : MonoBehaviour
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
+	public Vector3 offset;
 
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
 	private bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
+	private Transform player;
 
 	
 	void Awake()
@@ -25,12 +27,14 @@ public class Enemy : MonoBehaviour
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
 		score = GameObject.Find("Score").GetComponent<Score>();
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 
 	void FixedUpdate ()
 	{
 		// Create an array of all the colliders in front of the enemy.
 		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
+		transform.position = player.position + offset;
 
 		// Check each of the colliders.
 		foreach(Collider2D c in frontHits)
