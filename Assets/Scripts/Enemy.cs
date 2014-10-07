@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 //Testing git push and pull with new gitignore
+//Git pull worked!
 public class Enemy : MonoBehaviour
 {
 	public float moveSpeed = 12f;		// The speed the enemy moves at.
